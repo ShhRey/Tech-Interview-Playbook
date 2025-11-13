@@ -35,10 +35,10 @@ Different Ways to Represent Graphs:
 It represents a graph as an array of linked lists, where each list contains the vertices adjacent to a given vertex.
 
 What are the Problems?
-- 
+- To check for an edge from Vertex (U) to Vertex (V), one has to traverse all neighbors. TC: O(V)
 
 What are the Benefits?
-- Saves Space: just stores info about other vertices adjacent to a particular vertex.
+- Saves Space: just stores info about other vertices adjacent to a particular vertex.    SC: O(V + E)
 - Find Adjacents of any particular Vertex quickly.
 
 
@@ -49,10 +49,10 @@ It is a way of representing a graph as a matrix of boolean 0's and 1's.
 - For an Undirected Graph: Matrix will always be Symmetrical. It may or may not be symmetric for directed graphs.
 
 What are the Problems?
-- Stores redundant information.
+- Significant wastage of memory (matrix is filled with zeros).
 
 What are the Benefits?
-- Easy to check if an edge exists => Operation in O(1) time.
+- Easy to check if an edge exists: Look for mat[row][col] => Operation in O(1) time.
 
 Adjacency lists are better for sparse graphs (few edges), while adjacency matrices are efficient for dense graphs (many edges) and quick edge lookups. 
 

@@ -8,6 +8,7 @@ Core Terminologies used in Trees:
 - Node: Basic unit of a tree. Contains a value and references to other nodes.
 - Edge: Link between a node and its child.
 - Root: Top-most node in a tree that has no parent.
+- Child: A node that has a parent; direct successor of the parent.
 - Leaf: Node that has no children, usually at bottom of tree.
 - Parent: Node that has children, direct predecessor for child nodes.
 - Internal: Any node that has atleast one child.
@@ -22,17 +23,17 @@ Core Terminologies used in Trees:
 # ===================================================== Different Types of Trees: ==================================================#
 1. Binary Trees: Nodes have at-most two children [perfect, full, complete, balanced]
 
-2. Binary Search Trees: Left child's value is smaller than the parent's value, and the right child's value is greater.
-    Properties:
-        => All values in the left sub-tree for a node should also have values less than the node.
-        => All values in the right sub-tree for a node should also have values greater than or equal to the node.
+2. Binary Search Trees: Left subtree's node value is smaller than the root's value, and the right subtree's node value is greater than the root's value.
 
-3. Balanced Binary Trees:  [AVL, Red-Black, B-Tree]
+3. Balanced Binary Trees: Height of the tree should be O(Log n) where n is the number of nodes. For each node, its left/right subtree should be balanced binary trees respectively.
+    - Red-Black: Makes sure that the number of Black Nodes on every root-to-leaf path is the same and that there are no adjacent Red Nodes.
+        Self Balancing BTs: they are height-balanced BSTs that automatically keep the height as small as possible when insertion and deletion operations are performed on the tree.
+        - AVL: The difference between heights of left and right subtrees cannot be more than one for all nodes.
+        - Red-Black: Each node has an additional attribute (red/black) to maintain balance during insertions and deletions, ensuring efficient data retrieval and manipulation.
 
 4. Ternary Trees: Each node has atmost three child nodes (left, mid, right)
 
 5. N-ary Trees: Generalization of BTs where each node can have atmost N child nodes.
-
 
 
 #================================================================== Tree Representation in Programming? ==================================================================#
