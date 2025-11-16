@@ -128,35 +128,46 @@ class Garage:
 
 '''
 #============================================================================== 3. Composition ========================================================================#
-
+It models a "has-a" relationship between a whole and its parts; but unlike Aggregation, it signifies strong ownership and lifecycle dependency. 
+The contained object (part) cannot exist independently. Composition is the strongest form of Association.
 
 
 Key Characteristics:
-- 
-- 
+- The whole owns the part and controls its lifecycle.
+- When the whole is destroyed, the parts are also destroyed.
+- The parts are not shared with any other object.
+- The part has no independent meaning or identity outside the whole.
 
 UML Diagram Representation:
-- 
- 
-Direction (who knows about whom):
-- 
-
-Multiplicity (how many objects connected):
-- 
+- Composition is represented by a filled diamond (◆) at the “whole” end of the relationship.
+It is a preferred alternative to inheritance when building flexible systems.
 
 When to use Composition?
-- 
-- 
-- 
-- 
+- The part is not meaningful without the whole.
+- The whole should control the lifecycle of its parts.
+- The parts are not reused elsewhere in the system.
+- You want to model a strong containment relationship.
 
 Best Practices for Composition
-- 
-- 
-- 
+- You can build complex behavior by composing smaller, reusable parts.
+- It avoids the tight coupling and fragility of inheritance hierarchies.
+- You can swap out parts dynamically to modify behavior.
 '''
 
+# Engine is created inside Car
+# This way Engine will not Exist without Car
+class Engine:
+    def __init__(self, horsepower):
+        self.horsepower = horsepower
 
+# Car controls the lifestyle for Engine
+class Car:
+    def __init__(self, model, horsepower):
+        self.model = model
+        self.engine = Engine(horsepower) 
+
+    def show_specs(self):
+        print(f"{self.model} has {self.engine.horsepower} HP")
 
 
 
