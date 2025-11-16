@@ -175,30 +175,55 @@ class Car:
 
 '''
 #============================================================================== 4. Dependency ========================================================================#
-
-
+Unlike Association, Aggregation, or Composition, Dependency is not structural. It does not imply a long-term relationship or shared lifecycle. 
+The dependent class does not store the other class as an attribute. Instead, it reflects a one-time interaction, often through method parameters, local variables, or return types.
+It describes a "uses-a" relationship where one class temporarily uses another class to perform a task. 
 
 Key Characteristics:
-- 
-- 
+- Short-lived: The relationship exists only during method execution.
+- No ownership: The dependent class does not store the other as a field.
 
 UML Diagram Representation:
-- 
- 
-Direction (who knows about whom):
-- 
-
-Multiplicity (how many objects connected):
-- 
+- Dependency is shown using a dashed arrow (--->) pointing from the dependent class to the class it depends on.
 
 When to use Dependency?
-- 
-- 
-- 
-- 
+- You want loose coupling.
+- You only need the object temporarily.
+- You want to keep the class lightweight.
 
 Best Practices for Dependency
-- 
-- 
-- 
+- A class accepts another class as a method parameter.
+- A class instantiates or uses another class inside a method.
+- A class returns an object of another class from a method.
+- Avoid storing it as an attribute.
+- Use dependency injection for flexibility.
+
+
+Dependencies can appear in several common forms within a class:
+1. As Method Parameters: The dependency is passed into a method only when needed.
+2. As Class Fields/Instance Variables: The dependency is held as a field, often for repeated use.
+3. As Constructor Parameters: The dependency is provided when the object is created. 
+This is the foundation for Dependency Injection and is highly preferred.
+
+
+What is Dependency Injection?
+Dependency Injection is a design technique where a class receives the objects it depends on, instead of creating them itself.
+This leads to:
+- Better testability: You can inject mock dependencies during unit tests.
+- Greater modularity: Swap implementations (e.g., EmailSender → SMSSender) without changing core logic.
+- Loose coupling: Classes only depend on abstract contracts (interfaces), not concrete implementations.
 '''
+
+# Dependency (Mechanic uses Car temporarily to perform repair)
+class Car:
+    def __init__(self, model, color):
+        self.model = model
+        self.color = color
+
+class CarWash:
+    def clean(self, car):
+        print(f"Washing the {car.color} {car.model}... Sparkling clean!")
+
+class Mechanic:
+    def repair(self, car):
+        print(f"Repairing {car.model}... Done!")
