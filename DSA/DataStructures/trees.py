@@ -1,6 +1,10 @@
 '''
 #=============================================================== What is a Tree? =================================================================#
-A tree is a non-linear data structure used to represent data in a parent-child relationship.
+Trees are specific types of graphs. Trees are non-linear data structures that organize nodes in a hierarchy, where nodes may have children, siblings, and parent nodes.
+For a graph to be classified as a tree, it must:
+- Have no loops or cycles (paths where the start and end nodes are the same).
+- Be connected (every node can be reached from every other node).
+
 It consists of nodes connected by edges, forming a hierarchy from a root node at the top to leaf nodes at the bottom. 
 Trees naturally represent relationships where data items have one-to-many connections, making them essential for a wide range of applications.
 
@@ -19,13 +23,15 @@ Core Terminologies used in Trees:
 - Degree: Number of children from a node.
 - Height: Length of the longest path from a node to leaf.
 - Diameter: Number of edges in the longest path between any two nodes.
+- Subtree: Portion of a tree that is a tree itself.
 
 # ===================================================== Different Types of Trees: ==================================================#
 1. Binary Trees: Nodes have at-most two children [perfect, full, complete, balanced]
 
-2. Binary Search Trees: Left subtree's node value is smaller than the root's value, and the right subtree's node value is greater than the root's value.
+2. Binary Search Trees: Left subtree's node value is smaller than the root's value, and the right subtree's node value is greater than the root's value. 
+                        Left and Right Subtrees must also be BSTs themselves.
 
-3. Balanced Binary Trees: Height of the tree should be O(Log n) where n is the number of nodes. For each node, its left/right subtree should be balanced binary trees respectively.
+3. Balanced Binary Trees: Height of the tree should be O(Log n) where n is the number of nodes. For any node, height of its left/right subtree differ by not more than 1.
     - Red-Black: Makes sure that the number of Black Nodes on every root-to-leaf path is the same and that there are no adjacent Red Nodes.
         Self Balancing BTs: they are height-balanced BSTs that automatically keep the height as small as possible when insertion and deletion operations are performed on the tree.
         - AVL: The difference between heights of left and right subtrees cannot be more than one for all nodes.
@@ -34,33 +40,7 @@ Core Terminologies used in Trees:
 4. Ternary Trees: Each node has atmost three child nodes (left, mid, right)
 
 5. N-ary Trees: Generalization of BTs where each node can have atmost N child nodes.
-
-
-#================================================================== Tree Representation in Programming? ==================================================================#
-1. Adjacency List
-It represents nodes as keys of dictionary, where each value is a list of neighboring nodes, typically children.
-This format is efficient for sparse trees since nodes without children require little storage.
-
-What are the Problems?
-- 
-
-What are the Benefits?
-- Space-efficient for trees with many leaves.
-- Naturally fit for representing hierarchies (such as: organizational charts).
-
-
-
-2. Adjacency Matrix
-It is a way of representing a tree as a matrix of boolean 0's and 1's. 
-An adjacency matrix is a 2D list (or array) where entry [i][j] is 1 if there is an edge from node i to node j, and 0 otherwise
-
-What are the Problems?
-- Stores redundant information.
-
-What are the Benefits?
-- Easy to check if an edge exists => Operation in O(1) time.
 '''
-
 
 # Defining the Tree Nodes
 class TreeNode:
@@ -68,3 +48,42 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
+
+
+
+
+
+"""
+#=============================================================== What is a Trie? =================================================================#
+Tries are a variant of Tree data structure, used to store a set of strings.
+
+
+To implement a Trie, you typically need a more specialized node than a standard TreeNode:
+- Children (Dictionary/Array): Instead of left and right, each node has a collection of children (char -> node)
+- isEndWord (Boolean): A flag to indicate if a node marks the completion of a valid string
+- Value (Optional): Some Tries store a weight or frequency count at each node
+
+
+# ===================================================== Different Types of Trie: ==================================================#
+1. Standard Trie: As described above, stores every character individually.
+2. Compressed Trie (Radix Tree): Merges nodes with only one child to save space. (Eg: string "internal" would be one edge instead of eight separate nodes)
+3. Suffix Tree: Contains all suffixes of a given text, allowing for complex pattern matching in O(M) time where M is the pattern length.
+4. Bitwise Trie: Uses bits (0 and 1) instead of characters. (Eg: often used in IP routing and networking)
+
+
+Practical Uses:
+- Autocomplete/Auto-suggest: Finding all words with a common prefix.
+- Spell Checkers: Quickly verifying if a word exists in a dictionary.
+- IP Routing: Longest prefix matching in routers to determine the next hop.
+- Genome Analysis: Searching for specific DNA sequences within large datasets.
+- T9 Texting: (Historical) Predicting words based on numeric keypad input.
+"""
+
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.isEndWord = False
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
