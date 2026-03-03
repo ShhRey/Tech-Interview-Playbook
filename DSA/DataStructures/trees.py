@@ -55,7 +55,8 @@ class TreeNode:
 
 """
 #=============================================================== What is a Trie? =================================================================#
-Tries are a variant of Tree data structure, used to store a set of strings.
+Tries are a variant of Tree data structure, used to store a set of strings. Each node represents a single character of a string.
+As you traverse down from the root, the path to node defines a specific prefix. To find a word, you follow that prefix until you reach the node with the word you are looking for.
 
 
 To implement a Trie, you typically need a more specialized node than a standard TreeNode:

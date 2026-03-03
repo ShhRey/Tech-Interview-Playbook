@@ -15,7 +15,7 @@ In Python, priority queues are implemented using a heap data structure.
 
 
 
-#=============================================================== What is a Priority Queue? =================================================================#
+#=============================================================== What is a Heap? =================================================================#
 Heap is a tree data structure with a very specific propery; this property determines the relationship between each node and its children, based on heap type.
 Heaps are typically implemented as arrays to access parent and child nodes effectively.
 In Python, heapq is a built-in module that one can use to work with a default implementation of min-heap.
