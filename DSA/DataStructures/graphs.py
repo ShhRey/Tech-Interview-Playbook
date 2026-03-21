@@ -61,9 +61,20 @@ What are the Benefits?
 Adjacency lists are better for sparse graphs (few edges), while adjacency matrices are efficient for dense graphs (many edges) and quick edge lookups. 
 
 '''
-
-
-
+# Adjacency List to Matrix Converter
+def adjcency_list_to_matrix(adjL: dict):
+    # Define the dimensions
+    size = len(adjL)
+    # Fill default 0s and create size x size matrix
+    matrix = [[0 for _ in range(size)] for _ in range(size)]
+    # Iterate through keys/nodes
+    for node in adjL:
+        # Check for all nei of nodes
+        for nei in adjL[node]:
+            # Fill in 1s where connected
+            matrix[node][nei] = 1
+    # Return Matrix
+    return matrix
 
 
 
@@ -91,6 +102,29 @@ BFS is used for:
 
 '''
 
+from collections import deque
+
+def bfs(adjM, start_node):
+    # Initialize deque with start_node
+    queue = deque([start_node])
+    # Create a set for visited nodes
+    visited = set([start_node])
+    res = []
+    # Keep Checking till nodes in queue
+    while queue:
+        # Pop node one-by-one from queue
+        node = queue.popleft()
+        res.append(node)
+        # Check for neighbors and connected nodes
+        for nei, con in enumerate(adjM[node]):
+            # Add to set,queue only if con and not visited
+            if con and nei not in visited:
+                visited.add(nei)
+                queue.append(nei)
+    # Return res
+    return res
+
+
 
 '''
 #=============================================================== What is a DFS? (pre-order) =================================================================#
@@ -115,3 +149,27 @@ DFS is used for:
 - Topological sort (in DAGs)
 - Maze and puzzle solving
 '''
+
+# Implementing DFS on Adj Matrix
+def dfs(adjM, start_node):
+    # Start: one node from adjM
+    stack = [start_node]
+    # Visited Nodes
+    visited = set()
+    res = []
+    # Keep Checking until nodes in Stack
+    while stack:
+        # Pop and begin comparing
+        node = stack.pop()
+        # Append only if not in visited
+        if node not in visited:
+            visited.add(node)
+            res.append(node)
+            # Check connected neighbors of the appended node
+            for nei, con in enumerate(adjM[node]):
+                # If connected, and not in result
+                if con and nei not in visited:
+                    # Add neighbor to stack
+                    stack.append(nei)
+    # Return res
+    return res
